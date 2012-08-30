@@ -1,0 +1,7 @@
+user[foo]
+exec[ls -lha]
+file[/home/foo/quux]
+package[baz]
+group[bar]
+invalid
+foo[bar]

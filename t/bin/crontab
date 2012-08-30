@@ -1,0 +1,4 @@
+#!/usr/bin/env perl
+use strictures 1;
+my $arg = join ' ', @ARGV;
+print "* * * * * test $arg\n";

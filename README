@@ -1,0 +1,35 @@
+NAME
+    System::Introspector - framework for remote system introspection
+
+SYNOPSIS
+      $ system-introspector --storage <path> --config <path> [OPTIONS]
+
+    See system-introspector(1) for detailed information about which OPTIONS
+    can be used.
+
+DESCRIPTION
+    System::Introspector is a framework for remotely executing system wide
+    introspection. The introspection is done executing a set of probes on
+    the remote system that gather specific information. Gathered results are
+    stored in JSON format.
+
+AUTHOR
+     phaylon - Robert Sedlacek (cpan:PHAYLON) <r.sedlacek@shadowcat.co.uk>
+
+CONTRIBUTORS
+     mst - Matt S. Trout (cpan:MSTROUT) <mst@shadowcat.co.uk>
+
+SPONSORS
+    Parts of this code were paid for by
+
+    Socialflow <http://www.socialflow.com>
+    Shadowcat Systems <http://www.shadow.cat>
+
+COPYRIGHT
+    Copyright (c) 2012 the System::Introspector "AUTHOR", "CONTRIBUTORS" and
+    "SPONSORS" as listed above.
+
+LICENSE
+    This library is free software and may be distributed under the same
+    terms as perl itself.
+

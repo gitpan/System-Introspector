@@ -1,0 +1,13 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+if (grep { $_ eq 'upgrade' } @ARGV) {
+    printf "%s %s (%s)\n", @$_ for
+        ['Inst', 'foo', 'some foo info'],
+        ['Somethingelse', 'bar', 'some bar info'],
+        ['Remv', 'baz', 'some baz info'];
+}
+elsif (grep { $_ eq 'update' } @ARGV) {
+    print "OK\n";
+}

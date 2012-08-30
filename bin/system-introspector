@@ -1,0 +1,94 @@
+#!/usr/bin/env perl
+use strictures 1;
+
+use Getopt::Long;
+use Pod::Usage;
+use System::Introspector::State;
+use File::Tree::Snapshot;
+use System::Introspector::Config;
+
+GetOptions(
+    'c|config=s'    => \my $config_file,
+    's|storage=s'   => \my $storage_dir,
+    'a|all'         => \my $update_all,
+    'g|group=s'     => \my @update_groups,
+    'h|help'        => sub { pod2usage(0) },
+) or pod2usage(2);
+
+die "Requires --storage\n"
+    unless defined $storage_dir;
+
+die "Requires --config\n"
+    unless defined $config_file;
+
+die "Requires --all or --group option\n"
+    unless $update_all or @update_groups;
+
+my $config = System::Introspector::Config->new(
+    config_file => (defined($config_file)
+                    ? $config_file
+                    : "$storage_dir/main.conf"),
+);
+
+$config->has_group($_) or die "Unknown group '$_'\n"
+    for @update_groups;
+
+@update_groups = $config->groups
+    if $update_all;
+
+my $state = System::Introspector::State->new(
+    config => $config,
+    root   => $storage_dir,
+);
+
+$state->gather(@update_groups);
+
+__END__
+
+=head1 NAME
+
+system-introspector - Generate System Introspection Data
+
+=head1 SYNOPSIS
+
+    system-introspector --storage <path> [OPTIONS]
+
+=head1 DESCRIPTION
+
+See L<System::Introspector/DESCRIPTION> for more details.
+
+=head1 OPTIONS
+
+=head2 -s <path>, --storage <path>
+
+Path to storage. Always required.
+
+=head2 -c <file>, --config <file>
+
+Path to the configuration file.
+
+=head2 -a, --all
+
+Fetch all groups.
+
+=head2 -g <group>, --group <group>
+
+Fetch the specified group. Can be used multiple times.
+
+=head2 -h, --help
+
+Display help.
+
+=head1 COPYRIGHT
+
+Copyright (c) 2012 the L<System::Introspector>
+L<AUTHOR|System::Introspector/AUTHOR>,
+L<CONTRIBUTORS|System::Introspector/CONTRIBUTORS> and
+L<SPONSORS|System::Introspector/SPONSORS>.
+
+=head1 LICENSE
+
+This library is free software and may be distributed under the same terms
+as perl itself.
+
+=cut

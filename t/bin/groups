@@ -1,0 +1,4 @@
+#!/usr/bin/env perl
+use strictures 1;
+my $user = shift @ARGV;
+printf "$user : %s\n", join ' ', map { "${user}_group_${_}" } qw( A B C );
